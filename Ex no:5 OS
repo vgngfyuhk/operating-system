@@ -1,0 +1,27 @@
+#include <stdio.h>
+
+typedef struct { int id, priority; } Process;
+
+int main() {
+    Process p[] = {{1, 3}, {2, 1}, {3, 2}};
+    int n = 3, i, j, maxIdx;
+
+    for (i = 0; i < n; i++) {
+        maxIdx = i;
+        for (j = i + 1; j < n; j++)
+            if (p[j].priority < p[maxIdx].priority)
+                maxIdx = j;
+
+        Process temp = p[i];
+        p[i] = p[maxIdx];
+        p[maxIdx] = temp;
+
+        printf("Executing Process %d\n", p[i].id);
+    }
+    return 0;
+}
+
+output:
+Executing Process 2
+Executing Process 3
+Executing Process 1
